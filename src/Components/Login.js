@@ -1,7 +1,6 @@
-// src/Components/Login.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../css/login.css'; // Create and style this file as needed
+import '../css/login.css'; // Ensure this file contains necessary styling
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -19,12 +18,34 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle the form submission logic here, e.g., send data to backend API
-    console.log('Login form submitted:', formData);
-    // On successful login, navigate to another page
-    navigate('/dashboard');
+    try {
+      const response = await fetch('http://localhost:5000/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Save data in localStorage or state management library
+        localStorage.setItem('username', data.username);
+        localStorage.setItem('name', data.name);
+        localStorage.setItem('email', data.email);
+        localStorage.setItem('user_id', data.userid);
+        localStorage.setItem('isLoggedIn', true);
+        navigate('/dashboard'); // Redirect to dashboard after successful login
+      } else {
+        alert(data.message); // Show error message
+      }
+    } catch (error) {
+      console.error('Login failed:', error);
+      alert('An error occurred. Please try again.');
+    }
   };
 
   return (

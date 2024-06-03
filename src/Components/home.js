@@ -1,8 +1,8 @@
-// src/Components/Home.js
+// src/components/Home.js
 import React from 'react';
 import { FiArrowRight } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
-import '../css/landingpage.css'; // Ensure this file exists and is properly set up
+import '../css/landingpage.css';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -36,23 +36,46 @@ const Home = () => {
     scrollToSection("featuresSection");
   };
 
+  const handleCardClick = (path) => {
+    navigate(path);
+  };
+
   return (
     <div className="home-container">
       <div className="navbar">
-        <button className="nav-button" onClick={() => navigate('/login')}>Login</button>
-        <button className="nav-button" onClick={() => navigate('/signup')}>Signup</button>
+        <button className="nav-button" onClick={() => navigate('/about')}>About</button>
+        <button className="nav-button" onClick={() => navigate('/Testimonials')}>Testimonials</button>
+        <button className="nav-button" onClick={() => navigate('/Contact')}>Contact</button>
+        <button className="nav-button" onClick={() => navigate('/Login')}>Login</button>
+        <button className="nav-button" onClick={() => navigate('/Signup')}>Signup</button>
       </div>
       <div className="home-banner-container">
-        <div className="home-text-section">
-          <h1 className="primary-heading" style={{ marginLeft: '10vh' }}>
-            "Life is a combination of magic and pasta."
+        <div className="home-text-section top-centre">
+          <h1 className="primary-heading">
+            Welcome to Tastebuddy
           </h1>
-          <p className="primary-text" style={{ marginLeft: '10vh' }}>
+          <p className="primary-text">
             Cooking is not just about making food. It's about creating a moment that lasts a lifetime.
           </p>
-          <button className="secondary-button" onClick={handleRecipeButtonClick} style={{ marginLeft: '10vh' }}>
+          <br/>
+           <br/>
+          <button className="secondary-button" onClick={handleRecipeButtonClick}>
             Get Started <FiArrowRight />{" "}
           </button>
+        </div>
+      </div>
+      <br/>
+      <br/>
+      
+       <div className="cards-container">
+        <div className="card" onClick={() => handleCardClick('/diet-plans')}>
+          <h2>Diet Plans</h2>
+        </div>
+        <div className="card" onClick={() => handleCardClick('/explore')}>
+          <h2>Explore Page</h2>
+        </div>
+        <div className="card" onClick={() => handleCardClick('/pantry')}>
+          <h2>Pantry</h2>
         </div>
       </div>
     </div>

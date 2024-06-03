@@ -1,0 +1,80 @@
+/* src/css/dietplan.css */
+
+/* Page Container */
+.diet-plan-container {
+  min-height: 100vh; /* Ensure full viewport height */
+  background-image: url('../Assets/background.jpg'); /* Path to your background image */
+  background-size: cover; /* Cover the entire container with the background image */
+  background-position: center; /* Center the background image */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Navbar */
+.navbar {
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+  position: center;
+  top: 0;
+  z-index: 1000;
+  padding: 1rem;
+  display: flex;
+  justify-content: flex-end; /* Align items to the right */
+}
+
+.navbar a {
+  color: #ffffff; /* Navbar link color */
+  text-decoration: none; /* Remove underline from links */
+  padding: 0.5rem 1rem; /* Add padding to links */
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+}
+
+.navbar a:hover {
+  background-color: #ffffff; /* Change background color on hover */
+  color: #333; /* Change text color on hover */
+}
+
+/* Diet Plan List */
+.diet-plan-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid layout */
+  gap: 2rem; /* Gap between diet plan items */
+  padding: 2rem; /* Padding around the grid */
+}
+
+/* Diet Plan Item */
+.diet-plan-item {
+  background-color: rgba(255, 255, 255, 0.95); /* Slightly transparent white background */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 2.5rem;
+  transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition */
+  cursor: pointer; /* Pointer cursor on hover */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.diet-plan-item:hover {
+  transform: translateY(-5px); /* Slight lift on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+}
+
+.diet-plan-item h2 {
+  margin-top: 0;
+  color: #333;
+  font-size: 1.5rem; /* Increase font size */
+}
+
+.diet-plan-item p {
+  color: #666;
+}
+
+/* Footer */
+.footer {
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+  color: #ffffff; /* Footer text color */
+  text-align: center; /* Center-align text */
+  padding: 1rem; /* Add padding to footer */
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
