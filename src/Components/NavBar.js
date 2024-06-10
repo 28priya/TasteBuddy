@@ -1,17 +1,28 @@
 // src/components/NavBar.js
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import '../css/NavBar.css';
 
 const NavBar = () => {
+  const { user, logout } = useAuth();
+
   return (
-    <nav className="bg-gray-800 p-4">
-      <div className="container mx-auto flex justify-between items-center">
-        <Link to="/" className="text-white font-bold text-lg">Tastebuddy</Link>
-        <div className="flex space-x-4">
-          <Link to="/about" className="text-white">About</Link>
-          <Link to="/testimonials" className="text-white">Testimonials</Link>
-          <Link to="/contact" className="text-white">Contact</Link>
-          {/* Add more links as needed */}
+    <nav className="navbar">
+      <div className="container">
+        <Link to="/" className="nav-link"></Link>
+        <div className="nav-links">
+          {user ? (
+            <>
+              <span className="nav-user">Welcome, {user.email}</span>
+              <button onClick={logout} className="nav-logout">Logout</button>
+            </>
+          ) : (
+            <>
+              <Link to="/login" className="nav-link">Login</Link>
+              <Link to="/signup" className="nav-link">Signup</Link>
+            </>
+          )}
         </div>
       </div>
     </nav>

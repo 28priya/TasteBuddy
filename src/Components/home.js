@@ -2,10 +2,12 @@
 import React from 'react';
 import { FiArrowRight } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
-import '../css/landingpage.css';
+import { useAuth } from '../context/AuthContext';
+import '../css/home.css';
 
 const Home = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId);
@@ -13,7 +15,7 @@ const Home = () => {
 
     const startY = window.pageYOffset;
     const endY = section.getBoundingClientRect().top + startY;
-    const duration = 1000; // Adjust duration as needed (in milliseconds)
+    const duration = 1000;
 
     const startTime = performance.now();
 
@@ -37,37 +39,45 @@ const Home = () => {
   };
 
   const handleCardClick = (path) => {
-    navigate(path);
+    if (user) {
+      navigate(path);
+    } else {
+      navigate('/login');
+    }
   };
 
   return (
     <div className="home-container">
-      <div className="navbar">
-        <button className="nav-button" onClick={() => navigate('/about')}>About</button>
-        <button className="nav-button" onClick={() => navigate('/Testimonials')}>Testimonials</button>
-        <button className="nav-button" onClick={() => navigate('/Contact')}>Contact</button>
-        <button className="nav-button" onClick={() => navigate('/Login')}>Login</button>
-        <button className="nav-button" onClick={() => navigate('/Signup')}>Signup</button>
-      </div>
-      <div className="home-banner-container">
-        <div className="home-text-section top-centre">
+   
+       <nav> 
+        <div className="navbar-right">
+          <button className="nav-button" onClick={() => navigate('/about')}>About</button>
+          <button className="nav-button" onClick={() => navigate('/contact')}>Contact</button>
+          {!user && (
+            <>
+              <button className="nav-button" onClick={() => navigate('/login')}>Login</button>
+              <button className="nav-button" onClick={() => navigate('/signup')}>Signup</button>
+            </>
+          )}
+          {user && (
+            <button className="nav-button" onClick={() => navigate('/profile')}>Profile</button>
+          )}
+        </div>
+      </nav>
+      <header className="home-banner-container">
+        <div className="home-text-section">
           <h1 className="primary-heading">
             Welcome to Tastebuddy
           </h1>
           <p className="primary-text">
             Cooking is not just about making food. It's about creating a moment that lasts a lifetime.
           </p>
-          <br/>
-           <br/>
           <button className="secondary-button" onClick={handleRecipeButtonClick}>
             Get Started <FiArrowRight />{" "}
           </button>
         </div>
-      </div>
-      <br/>
-      <br/>
-      
-       <div className="cards-container">
+      </header>
+      <main className="cards-container">
         <div className="card" onClick={() => handleCardClick('/diet-plans')}>
           <h2>Diet Plans</h2>
         </div>
@@ -77,7 +87,7 @@ const Home = () => {
         <div className="card" onClick={() => handleCardClick('/pantry')}>
           <h2>Pantry</h2>
         </div>
-      </div>
+      </main>
     </div>
   );
 };

@@ -27,7 +27,7 @@ const ExplorePage = () => {
       );
       setRecipes(response.data.hits);
     } catch (error) {
-      setError('Error fetching recipes. Please try again.');
+      setError('Error fetching recipes. Please try again.');   
     } finally {
       setLoading(false);
     }
